@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import MenuScene from './scenes/menu-scene';
 import LevelsScene from './scenes/levels-scene';
-import BlocksScene from './scenes/blocks-scene';
+import BlocksScene from './scenes/game-scene';
 
 var config = {
     type: Phaser.AUTO,
