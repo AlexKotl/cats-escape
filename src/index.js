@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import MenuScene from './scenes/menu-scene';
 import LevelsScene from './scenes/levels-scene';
-import BlocksScene from './scenes/game-scene';
+import GameScene from './scenes/game-scene';
 import LevelEditorScene from './scenes/level-editor-scene';
 
 var config = {
@@ -20,7 +20,7 @@ var config = {
             debug: true,
         }
     },
-    scene: [LevelEditorScene, LevelsScene, MenuScene, BlocksScene]
+    scene: [GameScene, LevelEditorScene, LevelsScene, MenuScene, ]
 };
 
 var game = new Phaser.Game(config);

@@ -37,7 +37,7 @@ export default class LevelsScene extends Phaser.Scene {
         this.input.on('pointerup', (pointer, obj) => {
             const level = obj[0].levelNumber;
             if (level !== undefined) {
-                this.scene.start('BlocksScene', {
+                this.scene.start('GameScene', {
                     level: level,
                 });
             }

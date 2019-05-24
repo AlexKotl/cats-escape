@@ -1,6 +1,5 @@
 import Phaser from 'phaser';
 import figures from '../objects/figures';
-import map from '../objects/map';
 
 const DEBUG_MODE = false;
 
@@ -25,7 +24,7 @@ export default class Board {
         
         this.scene.graphics.clear(); // clear debug graphics
         // fill with figures
-        for (let figure of map.figures) {
+        for (let figure of this.scene.level.figures) {
             let shape = this.figureTypes[figure.name].shape;
             for (let y=0; y<shape.length; y++) {
                 for (let x=0; x<shape[y].length; x++) {

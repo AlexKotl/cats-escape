@@ -1,14 +1,14 @@
 import Phaser from 'phaser';
 import Board from '../objects/board';
 import Mouse from '../objects/mouse';
-import map from '../objects/map';
+import level from '../levels/001';
 
 const DEBUG_MODE = true;
 
 export default class GameScene extends Phaser.Scene {
     
     constructor() {
-        super({ key: 'BlocksScene'})
+        super({ key: 'GameScene'})
     }
 
     preload() {
@@ -37,6 +37,8 @@ export default class GameScene extends Phaser.Scene {
         
         this.graphics = this.add.graphics(); 
         
+        this.level = level;
+        
         this.board = new Board({
             blockSize: 54,
             size: {
@@ -47,15 +49,15 @@ export default class GameScene extends Phaser.Scene {
         });
         
         // add sprites
-        for (let n in map.figures) {
-            let figure = map.figures[n];
+        for (let n in this.level.figures) {
+            let figure = this.level.figures[n];
             
             let sprite = this.add.sprite(figure.pos.x * this.board.blockSize, figure.pos.y * this.board.blockSize, figure.name);
             sprite.setOrigin(0);
             sprite.alpha = DEBUG_MODE ? 0.8 : 1;
             this.input.setDraggable(sprite.setInteractive());
             
-            map.figures[n].sprite = sprite;
+            this.level.figures[n].sprite = sprite;
         }
         
         // add mouse
@@ -69,8 +71,8 @@ export default class GameScene extends Phaser.Scene {
         
         this.input.on('dragstart', (pointer, obj) => {
             // rebuild collision map - remove figure
-            this.draggedFigureIndex = map.figures.findIndex(el => obj === el.sprite);
-            map.figures[this.draggedFigureIndex].pos.x = 100;
+            this.draggedFigureIndex = this.level.figures.findIndex(el => obj === el.sprite);
+            this.level.figures[this.draggedFigureIndex].pos.x = 100;
             this.board.generateBoard();
             
             let mapPos = this.board.getMapPosition(obj.x, obj.y);
@@ -102,12 +104,12 @@ export default class GameScene extends Phaser.Scene {
             }
             
             if (this.isVerticalMove) {
-                if (!this.board.isFigureAllowed(map.figures[this.draggedFigureIndex], mapPos.x, newMapPos.y)) {
+                if (!this.board.isFigureAllowed(this.level.figures[this.draggedFigureIndex], mapPos.x, newMapPos.y)) {
                     obj.setPosition(obj.x, mapPos.y * this.board.blockSize);
                     return true;
                 }
                 // bottom bouce
-                if (!this.board.isFigureAllowed(map.figures[this.draggedFigureIndex], mapPos.x, newMapPos.y + 1)) {
+                if (!this.board.isFigureAllowed(this.level.figures[this.draggedFigureIndex], mapPos.x, newMapPos.y + 1)) {
                     obj.setPosition(obj.x, newMapPos.y * this.board.blockSize);
                     return true;
                 }
@@ -115,12 +117,12 @@ export default class GameScene extends Phaser.Scene {
                 obj.setPosition(obj.x, dragY);
             }
             else {
-                if (!this.board.isFigureAllowed(map.figures[this.draggedFigureIndex], newMapPos.x, mapPos.y)) {
+                if (!this.board.isFigureAllowed(this.level.figures[this.draggedFigureIndex], newMapPos.x, mapPos.y)) {
                     obj.setPosition(mapPos.x * this.board.blockSize, obj.y);
                     return true;
                 }
                 // right bouce
-                if (!this.board.isFigureAllowed(map.figures[this.draggedFigureIndex], newMapPos.x + 1, mapPos.y)) {
+                if (!this.board.isFigureAllowed(this.level.figures[this.draggedFigureIndex], newMapPos.x + 1, mapPos.y)) {
                     obj.setPosition(newMapPos.x * this.board.blockSize, obj.y);
                     return true;
                 }
@@ -134,8 +136,8 @@ export default class GameScene extends Phaser.Scene {
             obj.setPosition(mapPos.x * this.board.blockSize, mapPos.y * this.board.blockSize);
             
             // update collision map
-            map.figures[this.draggedFigureIndex].pos.x = mapPos.x;
-            map.figures[this.draggedFigureIndex].pos.y = mapPos.y;
+            this.level.figures[this.draggedFigureIndex].pos.x = mapPos.x;
+            this.level.figures[this.draggedFigureIndex].pos.y = mapPos.y;
             this.board.generateBoard();
         });
 
