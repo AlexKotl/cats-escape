@@ -42,6 +42,17 @@ export default class LevelEditorScene extends Phaser.Scene {
             
         }
     }
+    
+    logMap() {
+        let map = {figures: []};
+        for (let figure of this.map.figures) {
+            map.figures.push({
+                name: figure.name,
+                pos: figure.pos,
+            });
+        }
+        console.log("Map:", JSON.stringify(map));
+    }
 
     create() {
         this.input.mouse.disableContextMenu();
@@ -91,8 +102,6 @@ export default class LevelEditorScene extends Phaser.Scene {
             let draggedFigureIndex = this.map.figures.findIndex(el => obj === el.sprite);
             this.map.figures[draggedFigureIndex].pos.x = mapPos.x;
             this.map.figures[draggedFigureIndex].pos.y = mapPos.y;
-            
-            console.log('Map:', this.map);
         });
         
         this.input.on('pointerdown', (pointer, obj) => {
@@ -103,7 +112,11 @@ export default class LevelEditorScene extends Phaser.Scene {
                 this.map.figures.splice(index, 1);
                 return;
             }
-        })
+        });
+        
+        this.input.keyboard.on('keydown_S', (event) => {
+            this.logMap();
+        });
 
     }
 
