@@ -12,9 +12,9 @@ export default class MenuScene extends Phaser.Scene {
     create() {
         const x = this.game.canvas.width / 2;
         const y = this.game.canvas.height / 2;
-        this.add.sprite(x, y, 'cats');
-        const text = this.add.sprite(x, y, 'text').setAlpha(0);
-        const mouse = this.add.sprite(-x, y, 'menu-mouse');
+        this.add.sprite(x, y, 'cats').setScale(1.5);
+        const text = this.add.sprite(x, y, 'text').setAlpha(0).setScale(1.5);
+        const mouse = this.add.sprite(-x, y, 'menu-mouse').setScale(1.5);
         
         this.cameras.main.backgroundColor.setTo(255,255,255);
         

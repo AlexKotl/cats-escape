@@ -8,15 +8,15 @@ export default class LevelsScene extends Phaser.Scene {
     }
     
     create() {
-        this.add.text(20, 20, "Select cat level", {
-            font: '24px Courier',
+        this.add.text(40, 60, "Select cat level", {
+            font: '50px Courier',
         });
         
         let level = 1;
         for (let y=0; y<2; y++) {
             for (let x=0; x<3; x++) {
                 let spriteX = x * 400 + 200;
-                let spriteY = y * 400 + 250;
+                let spriteY = y * 400 + 450;
                 let sprite = this.add.sprite(spriteX, spriteY, 'clew').setScale(0.8);
                 sprite.setInteractive();
                 

@@ -28,16 +28,16 @@ export default class GameScene extends Phaser.Scene {
 
     create() {
         // setup camera and background
-        this.cameraOffset = {x: 200, y: 200};
+        this.cameraOffset = {x: 200, y: 400};
         this.cameras.main.scrollX = -this.cameraOffset.x;
         this.cameras.main.scrollY = -this.cameraOffset.y;
         this.add.sprite(-340, -90, 'room').setOrigin(0).setScale(2); // set offset for room start
         
         // level number
-        this.add.text(-150, 10, this.scene.settings.data.level, {font: "30px Courier"});
+        this.add.text(350, -250, "Level: " + this.scene.settings.data.level, {font: "60px Courier"});
         this.level = levelsData[this.scene.settings.data.level];
         
-        const menuButton = this.add.sprite(0, -100, 'menu_button').setScale(0.1).setInteractive().on('pointerdown', () => {
+        const menuButton = this.add.sprite(0, -250, 'menu_button').setScale(0.3).setInteractive().on('pointerdown', () => {
             this.scene.start('LevelsScene');
         });
         
