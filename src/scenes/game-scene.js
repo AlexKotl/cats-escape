@@ -28,7 +28,7 @@ export default class GameScene extends Phaser.Scene {
 
     create() {
         // setup camera and background
-        this.cameraOffset = {x: 200, y: 400};
+        this.cameraOffset = {x: 120, y: 400};
         this.cameras.main.scrollX = -this.cameraOffset.x;
         this.cameras.main.scrollY = -this.cameraOffset.y;
         this.add.sprite(-340, -90, 'room').setOrigin(0).setScale(2); // set offset for room start

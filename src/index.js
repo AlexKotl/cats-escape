@@ -10,8 +10,8 @@ var config = {
         mode: Phaser.Scale.FIT,
         parent: 'phaser-example',
         autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: 1200,
-        height: 1200 * window.innerHeight / window.innerWidth,
+        width: 1000,
+        height: 1000 * window.innerHeight / window.innerWidth,
     },
     pixelArt: false,
     physics: {
