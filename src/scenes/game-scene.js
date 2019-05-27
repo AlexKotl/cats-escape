@@ -20,31 +20,31 @@ export default class GameScene extends Phaser.Scene {
         this.load.image('cat4', 'assets/sprites/cats/cat4.png');
         this.load.image('cat5', 'assets/sprites/cats/cat5.png');
         this.load.spritesheet('mouse', 'assets/sprites/mouse.png', {
-            frameWidth: 54, 
-            frameHeight: 54,
+            frameWidth: 104, 
+            frameHeight: 104,
         });
         this.load.image('win-text', 'assets/sprites/menu/win.png');
     }
 
     create() {
         // setup camera and background
-        this.cameraOffset = {x: 170, y: 40};
+        this.cameraOffset = {x: 200, y: 200};
         this.cameras.main.scrollX = -this.cameraOffset.x;
         this.cameras.main.scrollY = -this.cameraOffset.y;
-        this.add.sprite(-this.cameraOffset.x, -this.cameraOffset.y, 'room').setOrigin(0);
+        this.add.sprite(-340, -90, 'room').setOrigin(0).setScale(2); // set offset for room start
         
         // level number
         this.add.text(-150, 10, this.scene.settings.data.level, {font: "30px Courier"});
         this.level = levelsData[this.scene.settings.data.level];
         
-        const menuButton = this.add.sprite(-120, 100, 'menu_button').setScale(0.1).setInteractive().on('pointerdown', () => {
+        const menuButton = this.add.sprite(0, -100, 'menu_button').setScale(0.1).setInteractive().on('pointerdown', () => {
             this.scene.start('LevelsScene');
         });
         
         this.graphics = this.add.graphics(); 
         
         this.board = new Board({
-            blockSize: 54,
+            blockSize: 108,
             size: {
                 width: 7, 
                 height: 7
@@ -57,7 +57,7 @@ export default class GameScene extends Phaser.Scene {
             let figure = this.level.figures[n];
             
             let sprite = this.add.sprite(figure.pos.x * this.board.blockSize, figure.pos.y * this.board.blockSize, figure.name);
-            sprite.setOrigin(0);
+            sprite.setOrigin(0).setScale(2);
             sprite.alpha = DEBUG_MODE ? 0.8 : 1;
             this.input.setDraggable(sprite.setInteractive());
             
@@ -159,8 +159,8 @@ export default class GameScene extends Phaser.Scene {
         
         this.tweens.add({
             targets: text,
-            scaleX: 1,
-            scaleY: 1,
+            scaleX: 2,
+            scaleY: 2,
             ease: 'Power1',
             duration: 3000,
         });
@@ -173,7 +173,7 @@ export default class GameScene extends Phaser.Scene {
         });
         
         setTimeout(() => {
-            this.scene.start('MenuScene');
+            this.scene.start('LevelsScene');
         }, 3000);
     }
     
