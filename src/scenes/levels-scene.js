@@ -13,7 +13,7 @@ export default class LevelsScene extends Phaser.Scene {
         });
         
         let level = 1;
-        for (let y=0; y<2; y++) {
+        for (let y=0; y<4; y++) {
             for (let x=0; x<3; x++) {
                 let spriteX = x * 400 + 200;
                 let spriteY = y * 400 + 450;
