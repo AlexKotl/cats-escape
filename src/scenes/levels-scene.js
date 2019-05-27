@@ -22,11 +22,11 @@ export default class LevelsScene extends Phaser.Scene {
                 
                 this.add.text(spriteX - 20, spriteY - 30, level, {font: '80px Courier'});
                 
-                if (level > 1) {
+                if (level > 3) {
                     sprite.setAlpha(0.3).setTint(0xff0000);
                 }
                 else {
-                    sprite.levelNumber = level;
+                    sprite.levelNumber = '00' + level;
                 }
                 
                 level++;
@@ -35,6 +35,10 @@ export default class LevelsScene extends Phaser.Scene {
         
         
         this.input.on('pointerup', (pointer, obj) => {
+            if (obj[0] === undefined) {
+                return;
+            }
+            
             const level = obj[0].levelNumber;
             if (level !== undefined) {
                 this.scene.start('GameScene', {

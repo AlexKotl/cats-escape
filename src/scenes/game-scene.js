@@ -3,7 +3,7 @@ import Board from '../objects/board';
 import Mouse from '../objects/mouse';
 import levelsData from '../objects/levels-data';
 
-const DEBUG_MODE = true;
+const DEBUG_MODE = false;
 
 export default class GameScene extends Phaser.Scene {
     
@@ -34,10 +34,9 @@ export default class GameScene extends Phaser.Scene {
         
         // level number
         this.add.text(-150, 10, this.scene.settings.data.level, {font: "30px Courier"});
+        this.level = levelsData[this.scene.settings.data.level];
         
         this.graphics = this.add.graphics(); 
-        
-        this.level = levelsData['001'];
         
         this.board = new Board({
             blockSize: 54,
