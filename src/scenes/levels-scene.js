@@ -34,7 +34,7 @@ export default class LevelsScene extends Phaser.Scene {
         }
         
         
-        this.input.on('pointerup', (pointer, obj) => {
+        this.input.on('pointerdown', (pointer, obj) => {
             if (obj[0] === undefined) {
                 return;
             }
