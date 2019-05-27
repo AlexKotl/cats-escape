@@ -22,22 +22,22 @@ export default class LevelEditorScene extends Phaser.Scene {
             frameHeight: 54,
         });
         
-        this.map = {
+        this.level = {
             figures: [],
         };
     }
     
     updateMap() {
         // add sprites
-        for (let n in this.map.figures) {
-            let figure = this.map.figures[n];
+        for (let n in this.level.figures) {
+            let figure = this.level.figures[n];
             
             if (figure.sprite === undefined) {
                 let sprite = this.add.sprite(figure.pos.x * this.board.blockSize, figure.pos.y * this.board.blockSize, figure.name);
                 sprite.setOrigin(0);
                 this.input.setDraggable(sprite.setInteractive());
                 
-                this.map.figures[n].sprite = sprite;
+                this.level.figures[n].sprite = sprite;
             }
             
         }
@@ -45,7 +45,7 @@ export default class LevelEditorScene extends Phaser.Scene {
     
     logMap() {
         let map = {figures: []};
-        for (let figure of this.map.figures) {
+        for (let figure of this.level.figures) {
             map.figures.push({
                 name: figure.name,
                 pos: figure.pos,
@@ -62,6 +62,8 @@ export default class LevelEditorScene extends Phaser.Scene {
         this.cameras.main.scrollX = -this.cameraOffset.x;
         this.cameras.main.scrollY = -this.cameraOffset.y;
         this.add.sprite(-this.cameraOffset.x, -this.cameraOffset.y, 'room').setOrigin(0);
+        this.add.text(10, -20, "Press S to output level to console", {font: "14px Courier"});
+        this.add.text(-140, -20, "Level\nEditor", {font: "20px Courier"});
         
         this.graphics = this.add.graphics(); 
         
@@ -77,11 +79,10 @@ export default class LevelEditorScene extends Phaser.Scene {
         // create gui
         let n = 0;
         for (let figure of ['cat1', 'cat2', 'cat3', 'cat4', 'cat5']) {
-            let sprite = this.add.sprite(470, 100 * n, figure).setOrigin(0);
+            let sprite = this.add.sprite(470, 90 * n, figure).setOrigin(0).setScale(0.5);
             sprite.setInteractive();
             sprite.on('pointerdown', (pointer, sprite) => {
-                console.log('adding to map')
-                this.map.figures.push({
+                this.level.figures.push({
                     name: figure,
                     pos: {x: 0, y: 0},
                 });
@@ -99,17 +100,17 @@ export default class LevelEditorScene extends Phaser.Scene {
             let mapPos = this.board.getMapPosition(obj.x + this.board.blockSize/2, obj.y + this.board.blockSize/2); // get avarage pos
             obj.setPosition(mapPos.x * this.board.blockSize, mapPos.y * this.board.blockSize);
             // update figure pos
-            let draggedFigureIndex = this.map.figures.findIndex(el => obj === el.sprite);
-            this.map.figures[draggedFigureIndex].pos.x = mapPos.x;
-            this.map.figures[draggedFigureIndex].pos.y = mapPos.y;
+            let draggedFigureIndex = this.level.figures.findIndex(el => obj === el.sprite);
+            this.level.figures[draggedFigureIndex].pos.x = mapPos.x;
+            this.level.figures[draggedFigureIndex].pos.y = mapPos.y;
         });
         
         this.input.on('pointerdown', (pointer, obj) => {
             if (pointer.rightButtonDown()) {
-                let index = this.map.figures.findIndex(el => obj[0] === el.sprite);
+                let index = this.level.figures.findIndex(el => obj[0] === el.sprite);
                 
-                this.map.figures[index].sprite.destroy();
-                this.map.figures.splice(index, 1);
+                this.level.figures[index].sprite.destroy();
+                this.level.figures.splice(index, 1);
                 return;
             }
         });
