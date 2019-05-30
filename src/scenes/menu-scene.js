@@ -16,7 +16,7 @@ export default class MenuScene extends Phaser.Scene {
         const text = this.add.sprite(x, y, 'text').setAlpha(0).setScale(1.5);
         const mouse = this.add.sprite(-x, y, 'menu-mouse').setScale(1.5);
         
-        this.cameras.main.backgroundColor.setTo(255,255,255);
+        this.cameras.main.setBackgroundColor('#fff');
         
         // mouse appear
         this.tweens.add({
