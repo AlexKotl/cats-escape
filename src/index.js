@@ -5,7 +5,7 @@ import GameScene from './scenes/game-scene';
 import LevelEditorScene from './scenes/level-editor-scene';
 
 var config = {
-    type: Phaser.AUTO,
+    type: Phaser.CANVAS,
     scale: {
         mode: Phaser.Scale.FIT,
         parent: 'phaser-example',
