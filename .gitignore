@@ -2,3 +2,8 @@
 www
 /mobile_platforms/plugins
 /mobile_platforms/platforms
+/mobile_platforms/package-lock.json
+/package-lock.json
+/node_modules
+/mobile_platforms/node_modules
+.DS_Store
