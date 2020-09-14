@@ -3,4 +3,5 @@
 
 ### Run the app
 
-`npm run dev`
+Run game in dev mode: `npm run dev`
+Run Levels editor: `npm run levels`

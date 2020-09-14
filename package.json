@@ -24,6 +24,7 @@
   },
   "scripts": {
     "dev": "webpack",
+    "levels": "webpack --env.LEVEL_EDITOR=1",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
