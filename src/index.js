@@ -10,10 +10,11 @@ var config = {
         mode: Phaser.Scale.FIT,
         parent: 'phaser-example',
         autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: 1000,
-        height: 1000 * window.innerHeight / window.innerWidth,
+        width: 150,
+        height: 256,
     },
-    pixelArt: false,
+    pixelArt: true,
+    zoom: 4,
     physics: {
         default: 'arcade',
         arcade: {
