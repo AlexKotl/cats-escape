@@ -28,20 +28,32 @@ export default class LevelsScene extends Phaser.Scene {
 
         var level = 1;
         var x, y;
+        var isAvailable = true;
         for (let floor=0; floor < floorsCount; floor++) {
             var spriteHouseLevel = this.add.sprite(0, houseOffset + spriteHouseRoof.height + houseLevelHeight * floor, 'house-level').setOrigin(0);
             for (let i = 0; i < 3; i++) {
                 x = 32 + i * 31;
                 y = houseOffset + spriteHouseRoof.height + houseLevelHeight * floor;
                 let sprite = this.add.sprite(x, y, 'house-window-' + (progress[level] ? 'on' : 'off')).setOrigin(0);
-                sprite.setInteractive();
+                sprite.alpha = isAvailable ? 1 : 0.8;
+                if (isAvailable) {
+                    sprite.setInteractive();
+                }
                 sprite.levelNumber = '' + level;
 
-                this.add.text(x + (level > 9 ? 4 : 7), y + 7, level, {
-                    font: '12px Arial',
-                    color: '#000',
-                    boundsAlignH: "center",
-                });
+                if (isAvailable) {
+                    this.add.text(x + (level > 9 ? 4 : 7), y + 7, level, {
+                        font: '12px Arial',
+                        color: isAvailable ? '#000' : '#444',
+                        boundsAlignH: "center",
+                    });
+                }
+
+
+                if (!progress[level] && isAvailable) {
+                    isAvailable = false;
+                }
+
                 level++;
             }
         }
