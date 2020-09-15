@@ -17,6 +17,8 @@ export default class LevelsScene extends Phaser.Scene {
         const floorsCount = Math.ceil(totalLevels / 3);
         const houseOffset = 14;
 
+        const progress = JSON.parse(localStorage.getItem('progress')) || {};
+
         this.add.text(18, 8, "Select the room:", {
             font: '10px Arial',
         });
@@ -31,7 +33,7 @@ export default class LevelsScene extends Phaser.Scene {
             for (let i = 0; i < 3; i++) {
                 x = 32 + i * 31;
                 y = houseOffset + spriteHouseRoof.height + houseLevelHeight * floor;
-                let sprite = this.add.sprite(x, y, 'house-window-' + (true ? 'on' : 'off')).setOrigin(0);
+                let sprite = this.add.sprite(x, y, 'house-window-' + (progress[level] ? 'on' : 'off')).setOrigin(0);
                 sprite.setInteractive();
                 sprite.levelNumber = '' + level;
 

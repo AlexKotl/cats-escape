@@ -37,11 +37,10 @@ export default class GameScene extends Phaser.Scene {
         this.add.sprite(-16, -64, 'level').setOrigin(0)//.setScale(2); // set offset for room start
 
         // level number
-        this.add.text(64, -54, "Level: " + this.scene.settings.data.level, {font: "11px Arial"});
+        this.add.text(64, -59, "Level: " + this.scene.settings.data.level, {font: "11px Arial"});
         this.level = levelsData[this.scene.settings.data.level];
 
         const menuButton = this.add.sprite(0, -60, 'menu-button').setOrigin(0).setInteractive().on('pointerup', () => {
-            console.log("MENU")
             this.scene.start('LevelsScene');
         });
 
@@ -193,10 +192,14 @@ export default class GameScene extends Phaser.Scene {
         const background = graphics.fillRect(-this.cameraOffset.x, -this.cameraOffset.y, this.game.canvas.width, this.game.canvas.height);
         background.alpha = 0;
 
+        let progress = JSON.parse(localStorage.getItem('progress')) || {};
+        progress[this.scene.settings.data.level] = { completed: true };
+        localStorage.setItem('progress', JSON.stringify(progress));
+
         this.tweens.add({
             targets: text,
-            scaleX: 2,
-            scaleY: 2,
+            scaleX: 0.3,
+            scaleY: 0.3,
             ease: 'Power1',
             duration: 3000,
         });

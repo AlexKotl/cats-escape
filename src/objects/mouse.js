@@ -40,7 +40,7 @@ export default class Mouse extends Phaser.GameObjects.Sprite {
             }
 
             // turn back
-            if (!this.board.isAllowed(mousePos.x , mousePos.y) && mousePos.y < this.board.size.height) {
+            if (!this.board.isAllowed(mousePos.x , mousePos.y) && mousePos.y < this.board.size.height && mousePos.y > -1) {
                 console.log("Turn back", this.board.size.height, mousePos.y, this.board.isAllowed(mousePos.x , mousePos.y))
                 this.speed *= -1;
                 this.scaleY *= -1;
