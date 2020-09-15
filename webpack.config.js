@@ -4,13 +4,12 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 var BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const WebpackFreeTexPacker = require('webpack-free-tex-packer');
-const process = require('process');
 
 module.exports = env => {
     var definePlugin = new webpack.DefinePlugin({
         WEBGL_RENDERER: true,
         CANVAS_RENDERER: false,
-        LEVEL_EDITOR: env.LEVEL_EDITOR
+        LEVEL_EDITOR: env ? (env.LEVEL_EDITOR || false) : false,
     });
 
     return {

@@ -11,12 +11,15 @@ export default class LevelEditorScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('room', 'assets/sprites/level.png');
+        this.load.image('level', 'assets/sprites/level.png');
+        this.load.image('board', 'assets/sprites/board.png');
         this.load.image('cat11', 'assets/sprites/cats/cat11.png');
         this.load.image('cat12', 'assets/sprites/cats/cat12.png');
         this.load.image('cat13', 'assets/sprites/cats/cat13.png');
         this.load.image('cat14', 'assets/sprites/cats/cat14.png');
         this.load.image('cat15', 'assets/sprites/cats/cat15.png');
+        this.load.image('cat16', 'assets/sprites/cats/cat16.png');
+        this.load.image('cat17', 'assets/sprites/cats/cat17.png');
         this.load.spritesheet('mouse', 'assets/sprites/mouse.png', {
             frameWidth: 16,
             frameHeight: 16,
@@ -61,8 +64,8 @@ export default class LevelEditorScene extends Phaser.Scene {
         this.cameraOffset = {x: 16, y: 64};
         this.cameras.main.scrollX = -this.cameraOffset.x;
         this.cameras.main.scrollY = -this.cameraOffset.y;
-        this.add.sprite(-this.cameraOffset.x, -this.cameraOffset.y, 'room').setOrigin(0);
-        this.add.text(40, -60, "Press S to output level to console", {font: "10px Courier"});
+        this.add.sprite(-this.cameraOffset.x, -this.cameraOffset.y, 'level').setOrigin(0);
+        this.add.text(0, -60, "Press S to output level to console", {font: "10px Courier"});
         this.add.text(10, -35, "Level\nEditor", {font: "10px Courier"});
 
         this.graphics = this.add.graphics();
@@ -78,7 +81,7 @@ export default class LevelEditorScene extends Phaser.Scene {
 
         // create gui
         let n = 0;
-        for (let figure of ['cat11', 'cat12', 'cat13', 'cat14', 'cat15']) {
+        for (let figure of ['cat11', 'cat12', 'cat13', 'cat14', 'cat15', 'cat16', 'cat17']) {
             //let row = Math.floor(n / 4);
             let sprite = this.add.sprite(32 * (n % 4), 130 + Math.floor(n / 4) * 32, figure).setOrigin(0).setScale(0.7);
             sprite.setInteractive();
@@ -107,7 +110,6 @@ export default class LevelEditorScene extends Phaser.Scene {
         });
 
         this.input.on('pointerdown', (pointer, obj) => {
-            console.log('removing', pointer)
             if (pointer.rightButtonDown()) {
 
                 let index = this.level.figures.findIndex(el => obj[0] === el.sprite);
