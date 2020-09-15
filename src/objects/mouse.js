@@ -10,6 +10,7 @@ export default class Mouse extends Phaser.GameObjects.Sprite {
         this.speed = -1;
 
         this.setInteractive();
+        this.setOrigin(0.5, 0);
 
         // launch mouse
         this.on('pointerdown', (pointer) => {
