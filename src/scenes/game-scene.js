@@ -73,7 +73,7 @@ export default class GameScene extends Phaser.Scene {
             scene: this,
             board: this.board,
             x: Math.round(this.board.size.height/2 - 1) * this.board.blockSize + this.board.blockSize/2,
-            y: this.board.blockSize * 8,
+            y: this.board.blockSize * 6,
             key: 'mouse',
         });
 

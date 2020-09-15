@@ -22,13 +22,13 @@ export default class Mouse extends Phaser.GameObjects.Sprite {
             const mousePos = this.board.getMapPosition(this.x, this.y);
 
             // finish
-            if (mousePos.x + 1 >= this.board.size.width) {
+            if (mousePos.y < 0) {
                 this.scene.finish();
                 this.isRunning = false;
             }
 
             // return at home
-            if (mousePos.y < -1 && this.speed < 0) {
+            if (mousePos.y >= 7 && this.speed > 0) {
                 console.log('HOME!');
                 this.isRunning = false;
                 this.speed /= -2;
@@ -37,14 +37,15 @@ export default class Mouse extends Phaser.GameObjects.Sprite {
             }
 
             // turn back
-            if (!this.board.isAllowed(mousePos.x , mousePos.y) && mousePos.y >= 0) {
-                console.log("Turn back")
-                this.speed *= 2;
+            if (!this.board.isAllowed(mousePos.x , mousePos.y) && mousePos.y < this.board.size.height) {
+                console.log("Turn back", this.board.size.height, mousePos.y, this.board.isAllowed(mousePos.x , mousePos.y))
+                this.speed *= -2;
                 this.scaleY *= -1;
             }
 
-            this.y += this.speed;
             console.log("Y", this.y)
+            this.y += this.speed;
+
         }
 
     }
