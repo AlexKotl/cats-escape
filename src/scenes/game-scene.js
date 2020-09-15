@@ -14,6 +14,7 @@ export default class GameScene extends Phaser.Scene {
     preload() {
         this.load.image('level', 'assets/sprites/level.png');
         this.load.image('board', 'assets/sprites/board.png');
+        this.load.image('menu-button', 'assets/sprites/menu/menu-button.png');
         this.load.image('cat11', 'assets/sprites/cats/cat11.png');
         this.load.image('cat12', 'assets/sprites/cats/cat12.png');
         this.load.image('cat13', 'assets/sprites/cats/cat13.png');
@@ -36,12 +37,13 @@ export default class GameScene extends Phaser.Scene {
         this.add.sprite(-16, -64, 'level').setOrigin(0)//.setScale(2); // set offset for room start
 
         // level number
-        this.add.text(0, -54, "Level: " + this.scene.settings.data.level, {font: "11px Arial"});
+        this.add.text(64, -54, "Level: " + this.scene.settings.data.level, {font: "11px Arial"});
         this.level = levelsData[this.scene.settings.data.level];
 
-        // const menuButton = this.add.sprite(0, -250, 'menu_button').setScale(0.3).setInteractive().on('pointerdown', () => {
-        //     this.scene.start('LevelsScene');
-        // });
+        const menuButton = this.add.sprite(0, -60, 'menu-button').setOrigin(0).setInteractive().on('pointerup', () => {
+            console.log("MENU")
+            this.scene.start('LevelsScene');
+        });
 
         this.graphics = this.add.graphics();
 

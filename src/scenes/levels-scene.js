@@ -46,7 +46,7 @@ export default class LevelsScene extends Phaser.Scene {
 
         this.add.sprite(0, houseOffset + spriteHouseRoof.height + (spriteHouseLevel.height * floorsCount), 'house-basement').setOrigin(0);
 
-        this.input.on('pointerdown', (pointer, obj) => {
+        this.input.on('pointerup', (pointer, obj) => {
             if (obj[0] === undefined) {
                 return;
             }
