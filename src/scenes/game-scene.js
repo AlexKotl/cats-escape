@@ -22,7 +22,7 @@ export default class GameScene extends Phaser.Scene {
         this.load.image('cat15', 'assets/sprites/cats/cat15.png');
         this.load.image('cat16', 'assets/sprites/cats/cat16.png');
         this.load.image('cat17', 'assets/sprites/cats/cat17.png');
-        this.load.spritesheet('mouse', 'assets/sprites/mouse.png', {
+        const mouseSprite = this.load.spritesheet('mouse', 'assets/sprites/mouse.png', {
             frameWidth: 16,
             frameHeight: 16,
         });
@@ -77,7 +77,31 @@ export default class GameScene extends Phaser.Scene {
             key: 'mouse',
         });
 
+        // animations
+        this.anims.create({
+            key: 'run',
+            frames: this.anims.generateFrameNumbers('mouse', {
+                start: 1,
+                end: 3,
+            }),
+            frameRate: 10,
+            yoyo: false,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'idle',
+            frames: this.anims.generateFrameNumbers('mouse', {
+                start: 0,
+                end: 0,
+            }),
+            frameRate: 5,
+            repeat: -1
+        });
+
         this.input.on('dragstart', (pointer, obj) => {
+            if (this.mouse.isRunning) {
+                return false;
+            }
             // rebuild collision map - remove figure
             this.draggedFigureIndex = this.level.figures.findIndex(el => obj === el.sprite);
             this.level.figures[this.draggedFigureIndex].pos.x = 100;
@@ -92,6 +116,10 @@ export default class GameScene extends Phaser.Scene {
 
         // dragX - new pos of element
         this.input.on('drag', (pointer, obj, dragX, dragY) => {
+            if (this.mouse.isRunning) {
+                return false;
+            }
+
             if (Math.abs(dragX - obj.x) < 5 && Math.abs(dragY - obj.y) < 5) {
                 return true;
             }
@@ -140,6 +168,10 @@ export default class GameScene extends Phaser.Scene {
         });
 
         this.input.on('dragend', (pointer, obj) => {
+            if (this.mouse.isRunning) {
+                return false;
+            }
+
             let mapPos = this.board.getMapPosition(obj.x + this.board.blockSize/2, obj.y + this.board.blockSize/2); // get avarage pos
             obj.setPosition(mapPos.x * this.board.blockSize, mapPos.y * this.board.blockSize);
 
