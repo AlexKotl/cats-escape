@@ -72,8 +72,8 @@ export default class GameScene extends Phaser.Scene {
         this.mouse = new Mouse({
             scene: this,
             board: this.board,
-            x: -30,
-            y: Math.round(this.board.size.height/2 - 1) * this.board.blockSize + this.board.blockSize/2,
+            x: Math.round(this.board.size.height/2 - 1) * this.board.blockSize + this.board.blockSize/2,
+            y: this.board.blockSize * 8,
             key: 'mouse',
         });
 
