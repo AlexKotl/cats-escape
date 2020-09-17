@@ -119,7 +119,7 @@ export default class GameScene extends Phaser.Scene {
                 return false;
             }
 
-            if (Math.abs(dragX - obj.x) < 5 && Math.abs(dragY - obj.y) < 5) {
+            if (Math.abs(dragX - obj.x) < 3 && Math.abs(dragY - obj.y) < 3) {
                 return true;
             }
 
@@ -184,9 +184,9 @@ export default class GameScene extends Phaser.Scene {
 
     finish() {
         const graphics = this.add.graphics();
-        const text = this.add.sprite(this.game.canvas.width / 2 - this.cameraOffset.x, this.game.canvas.height / 2 - this.cameraOffset.y, 'win-text');
-        text.scaleX = 0;
-        text.scaleY = 0;
+        // const text = this.add.sprite(this.game.canvas.width / 2 - this.cameraOffset.x, this.game.canvas.height / 2 - this.cameraOffset.y, 'win-text');
+        // text.scaleX = 0;
+        // text.scaleY = 0;
 
         graphics.fillStyle(0xffffff, 1);
         const background = graphics.fillRect(-this.cameraOffset.x, -this.cameraOffset.y, this.game.canvas.width, this.game.canvas.height);
@@ -196,13 +196,13 @@ export default class GameScene extends Phaser.Scene {
         progress[this.scene.settings.data.level] = { completed: true };
         localStorage.setItem('progress', JSON.stringify(progress));
 
-        this.tweens.add({
-            targets: text,
-            scaleX: 0.3,
-            scaleY: 0.3,
-            ease: 'Power1',
-            duration: 3000,
-        });
+        // this.tweens.add({
+        //     targets: text,
+        //     scaleX: 0.3,
+        //     scaleY: 0.3,
+        //     ease: 'Power1',
+        //     duration: 3000,
+        // });
 
         this.tweens.add({
             targets: background,
@@ -213,7 +213,7 @@ export default class GameScene extends Phaser.Scene {
 
         setTimeout(() => {
             this.scene.start('LevelsScene');
-        }, 3000);
+        }, 2000);
     }
 
     update() {

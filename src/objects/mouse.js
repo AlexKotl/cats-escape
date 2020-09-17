@@ -46,7 +46,6 @@ export default class Mouse extends Phaser.GameObjects.Sprite {
                 this.scaleY *= -1;
             }
 
-            console.log("Y", this.y)
             this.y += this.speed;
 
         }
