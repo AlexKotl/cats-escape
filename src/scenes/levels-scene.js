@@ -1,4 +1,5 @@
 export default class LevelsScene extends Phaser.Scene {
+
     constructor() {
         super({ key: 'LevelsScene'})
     }
@@ -10,6 +11,8 @@ export default class LevelsScene extends Phaser.Scene {
         this.load.image('house-roof', 'assets/sprites/house/house-roof.png');
         this.load.image('house-window-off', 'assets/sprites/house/house-window-off.png');
         this.load.image('house-window-on', 'assets/sprites/house/house-window-on.png');
+        this.load.image('house-road', 'assets/sprites/house/house-road.png');
+        this.load.image('house-sky', 'assets/sprites/house/house-sky.png');
     }
 
     create() {
@@ -18,6 +21,8 @@ export default class LevelsScene extends Phaser.Scene {
         const houseOffset = 14;
 
         const progress = JSON.parse(localStorage.getItem('progress')) || {};
+
+        this.skyBackground = this.add.tileSprite(0, 0, 150, 250, 'house-sky').setOrigin(0);
 
         this.add.text(18, 8, "Select the room:", {
             font: '10px Arial',
@@ -57,7 +62,7 @@ export default class LevelsScene extends Phaser.Scene {
                 level++;
             }
         }
-
+        this.add.sprite(0, houseOffset + spriteHouseRoof.height + (spriteHouseLevel.height * floorsCount + 32), 'house-road').setOrigin(0);
         this.add.sprite(0, houseOffset + spriteHouseRoof.height + (spriteHouseLevel.height * floorsCount), 'house-basement').setOrigin(0);
 
         this.input.on('pointerup', (pointer, obj) => {
@@ -72,5 +77,9 @@ export default class LevelsScene extends Phaser.Scene {
                 });
             }
        });
+    }
+
+    update() {
+        this.skyBackground.tilePositionX += 0.005;
     }
 }

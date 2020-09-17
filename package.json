@@ -23,7 +23,7 @@
     "webpack-free-tex-packer": "^0.2.0"
   },
   "scripts": {
-    "dev": "webpack",
+    "dev": "webpack --inline",
     "levels": "webpack --env.LEVEL_EDITOR=1",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

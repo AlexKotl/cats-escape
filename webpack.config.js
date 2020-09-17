@@ -57,11 +57,11 @@ module.exports = env => {
             new CopyPlugin([
                 { from: './assets/sprites', to: './assets/sprites' },
             ]),
-            new WebpackFreeTexPacker(path.resolve(__dirname, 'assets/tiles'), 'assets', {
-                textureName: 'tilemap',
-                removeFileExtension: true,
-                prependFolderName: false,
-            }),
+            // new WebpackFreeTexPacker(path.resolve(__dirname, 'assets/tiles'), 'assets', {
+            //     textureName: 'tilemap',
+            //     removeFileExtension: true,
+            //     prependFolderName: false,
+            // }),
         ],
         module: {
             rules: [
