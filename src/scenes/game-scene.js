@@ -15,6 +15,7 @@ export default class GameScene extends Phaser.Scene {
         this.load.image('level', 'assets/sprites/level.png');
         this.load.image('board', 'assets/sprites/board.png');
         this.load.image('menu-button', 'assets/sprites/menu/menu-button.png');
+        this.load.image('menu-restart', 'assets/sprites/menu/menu-restart.png');
         this.load.image('cat11', 'assets/sprites/cats/cat11.png');
         this.load.image('cat12', 'assets/sprites/cats/cat12.png');
         this.load.image('cat13', 'assets/sprites/cats/cat13.png');
@@ -37,14 +38,19 @@ export default class GameScene extends Phaser.Scene {
         this.add.sprite(-16, -64, 'level').setOrigin(0)//.setScale(2); // set offset for room start
 
         // level number
-        this.add.text(64, -59, "Level: " + this.scene.settings.data.level, {font: "11px Arial"});
-        this.level = levelsData[this.scene.settings.data.level];
+        this.add.text(38, -59, "Level: " + this.scene.settings.data.level, {font: "11px Arial"});
 
-        const menuButton = this.add.sprite(0, -60, 'menu-button').setOrigin(0).setInteractive().on('pointerup', () => {
+        const menuButton = this.add.sprite(-10, -60, 'menu-button').setOrigin(0).setInteractive().on('pointerup', () => {
             this.scene.start('LevelsScene');
         });
 
+        const restartButton = this.add.sprite(100, -60, 'menu-restart').setOrigin(0).setInteractive().on('pointerup', () => {
+            this.scene.restart()
+        });
+
         this.graphics = this.add.graphics();
+
+        this.level = JSON.parse(JSON.stringify( levelsData[this.scene.settings.data.level])); // clone object that weird style
 
         this.board = new Board({
             blockSize: 16,
@@ -184,9 +190,6 @@ export default class GameScene extends Phaser.Scene {
 
     finish() {
         const graphics = this.add.graphics();
-        // const text = this.add.sprite(this.game.canvas.width / 2 - this.cameraOffset.x, this.game.canvas.height / 2 - this.cameraOffset.y, 'win-text');
-        // text.scaleX = 0;
-        // text.scaleY = 0;
 
         graphics.fillStyle(0xffffff, 1);
         const background = graphics.fillRect(-this.cameraOffset.x, -this.cameraOffset.y, this.game.canvas.width, this.game.canvas.height);
@@ -195,14 +198,6 @@ export default class GameScene extends Phaser.Scene {
         let progress = JSON.parse(localStorage.getItem('progress')) || {};
         progress[this.scene.settings.data.level] = { completed: true };
         localStorage.setItem('progress', JSON.stringify(progress));
-
-        // this.tweens.add({
-        //     targets: text,
-        //     scaleX: 0.3,
-        //     scaleY: 0.3,
-        //     ease: 'Power1',
-        //     duration: 3000,
-        // });
 
         this.tweens.add({
             targets: background,
