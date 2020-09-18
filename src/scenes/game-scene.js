@@ -85,33 +85,35 @@ export default class GameScene extends Phaser.Scene {
         });
 
         this.input.on('dragstart', (pointer, obj) => {
-            if (this.mouse.isRunning) {
+            this.dragSprite = this.board.getSpriteByCoords(pointer.x - this.cameraOffset.x, pointer.y - this.cameraOffset.y)
+
+            if (this.mouse.isRunning || !this.dragSprite) {
                 return false;
             }
+
             // rebuild collision map - remove figure
-            console.log("obj", pointer)
-            this.draggedFigureIndex = this.level.figures.findIndex(el => obj === el.sprite);
+            this.draggedFigureIndex = this.level.figures.findIndex(el => this.dragSprite === el.sprite);
             this.level.figures[this.draggedFigureIndex].pos.x = 100;
             this.board.generateBoard();
 
-            let mapPos = this.board.getMapPosition(obj.x, obj.y);
+            let mapPos = this.board.getMapPosition(this.dragSprite.x, this.dragSprite.y);
             this.board.cells[mapPos.y][mapPos.x] = 0;
 
             this.isVerticalMove = undefined;
-            this.draggedFrom = {x: obj.x, y: obj.y};
+            this.draggedFrom = {x: this.dragSprite.x, y: this.dragSprite.y};
         });
 
         // dragX - new pos of element
         this.input.on('drag', (pointer, obj, dragX, dragY) => {
-            if (this.mouse.isRunning) {
+            if (this.mouse.isRunning || !this.dragSprite) {
                 return false;
             }
 
-            if (Math.abs(dragX - obj.x) < 3 && Math.abs(dragY - obj.y) < 3) {
+            if (Math.abs(dragX - this.dragSprite.x) < 3 && Math.abs(dragY - this.dragSprite.y) < 3) {
                 return true;
             }
 
-            let mapPos = this.board.getMapPosition(obj.x, obj.y);
+            let mapPos = this.board.getMapPosition(this.dragSprite.x, this.dragSprite.y);
             let newMapPos = this.board.getMapPosition(dragX, dragY);
 
             // make new map pos difference not bigger than 1 as we move cell by cell and cant jump over figures
@@ -123,34 +125,34 @@ export default class GameScene extends Phaser.Scene {
 
             // decide which axis we move block
             if (this.isVerticalMove === undefined) {
-                this.isVerticalMove = Math.abs(obj.y - dragY) > Math.abs(obj.x - dragX);
+                this.isVerticalMove = Math.abs(this.dragSprite.y - dragY) > Math.abs(this.dragSprite.x - dragX);
             }
 
             if (this.isVerticalMove) {
                 if (!this.board.isFigureAllowed(this.level.figures[this.draggedFigureIndex], mapPos.x, newMapPos.y)) {
-                    obj.setPosition(obj.x, mapPos.y * this.board.blockSize);
+                    this.dragSprite.setPosition(this.dragSprite.x, mapPos.y * this.board.blockSize);
                     return true;
                 }
                 // bottom bouce
                 if (!this.board.isFigureAllowed(this.level.figures[this.draggedFigureIndex], mapPos.x, newMapPos.y + 1)) {
-                    obj.setPosition(obj.x, newMapPos.y * this.board.blockSize);
+                    this.dragSprite.setPosition(this.dragSprite.x, newMapPos.y * this.board.blockSize);
                     return true;
                 }
 
-                obj.setPosition(obj.x, dragY);
+                this.dragSprite.setPosition(this.dragSprite.x, dragY);
             }
             else {
                 if (!this.board.isFigureAllowed(this.level.figures[this.draggedFigureIndex], newMapPos.x, mapPos.y)) {
-                    obj.setPosition(mapPos.x * this.board.blockSize, obj.y);
+                    this.dragSprite.setPosition(mapPos.x * this.board.blockSize, this.dragSprite.y);
                     return true;
                 }
                 // right bouce
                 if (!this.board.isFigureAllowed(this.level.figures[this.draggedFigureIndex], newMapPos.x + 1, mapPos.y)) {
-                    obj.setPosition(newMapPos.x * this.board.blockSize, obj.y);
+                    this.dragSprite.setPosition(newMapPos.x * this.board.blockSize, this.dragSprite.y);
                     return true;
                 }
 
-                obj.setPosition(dragX, obj.y);
+                this.dragSprite.setPosition(dragX, this.dragSprite.y);
             }
         });
 
@@ -159,8 +161,8 @@ export default class GameScene extends Phaser.Scene {
                 return false;
             }
 
-            let mapPos = this.board.getMapPosition(obj.x + this.board.blockSize/2, obj.y + this.board.blockSize/2); // get avarage pos
-            obj.setPosition(mapPos.x * this.board.blockSize, mapPos.y * this.board.blockSize);
+            let mapPos = this.board.getMapPosition(this.dragSprite.x + this.board.blockSize/2, this.dragSprite.y + this.board.blockSize/2); // get avarage pos
+            this.dragSprite.setPosition(mapPos.x * this.board.blockSize, mapPos.y * this.board.blockSize);
 
             // update collision map
             this.level.figures[this.draggedFigureIndex].pos.x = mapPos.x;

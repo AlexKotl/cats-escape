@@ -2,7 +2,7 @@ const levelsData = {
     // simple
     '1': {"figures":[{"name":"cat13","pos":{"x":2,"y":1}}]},
     // 2 cats
-    '2': {"figures":[{"name":"cat12","pos":{"x":2,"y":2}},{"name":"cat11","pos":{"x":3,"y":3}}]},
+    '2': {"figures":[{"name":"cat11","pos":{"x":3,"y":3}},{"name":"cat12","pos":{"x":2,"y":2}}]},
     // easy
     '3': {"figures":[{"name":"cat14","pos":{"x":0,"y":0}},{"name":"cat14","pos":{"x":0,"y":2}},{"name":"cat14","pos":{"x":5,"y":0}},{"name":"cat14","pos":{"x":5,"y":4}},{"name":"cat14","pos":{"x":0,"y":4}},{"name":"cat14","pos":{"x":5,"y":2}},{"name":"cat13","pos":{"x":2,"y":0}},{"name":"cat16","pos":{"x":3,"y":3}}]},
     // a bit harder
