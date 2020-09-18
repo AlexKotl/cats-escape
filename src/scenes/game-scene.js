@@ -40,13 +40,13 @@ export default class GameScene extends Phaser.Scene {
         this.add.sprite(-16, -87, 'level').setOrigin(0); // set offset for room start
 
         // level number
-        this.add.text(38, -59, "Level: " + this.scene.settings.data.level, {font: "11px Arial"});
+        this.add.text(42, -69, "Level: " + this.scene.settings.data.level, {font: "11px Arial"});
 
-        const menuButton = this.add.sprite(-10, -60, 'menu-button').setOrigin(0).setInteractive().on('pointerup', () => {
+        const menuButton = this.add.sprite(-10, -70, 'menu-button').setOrigin(0).setInteractive().on('pointerup', () => {
             this.scene.start('LevelsScene');
         });
 
-        const restartButton = this.add.sprite(100, -60, 'menu-restart').setOrigin(0).setInteractive().on('pointerup', () => {
+        const restartButton = this.add.sprite(100, -70, 'menu-restart').setOrigin(0).setInteractive().on('pointerup', () => {
             this.scene.restart()
         });
 
@@ -84,41 +84,12 @@ export default class GameScene extends Phaser.Scene {
             key: 'mouse',
         });
 
-        // animations
-        this.anims.create({
-            key: 'run',
-            frames: this.anims.generateFrameNumbers('mouse', {
-                start: 3,
-                end: 6,
-            }),
-            frameRate: 10,
-            yoyo: false,
-            repeat: -1
-        });
-        this.anims.create({
-            key: 'idle',
-            frames: this.anims.generateFrameNumbers('mouse', {
-                start: 0,
-                end: 0,
-            }),
-            frameRate: 5,
-            repeat: -1
-        });
-        this.anims.create({
-            key: 'sneak',
-            frames: this.anims.generateFrameNumbers('mouse', {
-                start: 0,
-                end: 2,
-            }),
-            frameRate: 5,
-            repeat: 3
-        });
-
         this.input.on('dragstart', (pointer, obj) => {
             if (this.mouse.isRunning) {
                 return false;
             }
             // rebuild collision map - remove figure
+            console.log("obj", pointer)
             this.draggedFigureIndex = this.level.figures.findIndex(el => obj === el.sprite);
             this.level.figures[this.draggedFigureIndex].pos.x = 100;
             this.board.generateBoard();

@@ -17,6 +17,36 @@ export default class Mouse extends Phaser.GameObjects.Sprite {
             this.isRunning = true;
             this.play('run');
         });
+
+        // animations
+        this.scene.anims.create({
+            key: 'run',
+            frames: this.scene.anims.generateFrameNumbers('mouse', {
+                start: 3,
+                end: 6,
+            }),
+            frameRate: 10,
+            yoyo: false,
+            repeat: -1
+        });
+        this.scene.anims.create({
+            key: 'idle',
+            frames: this.scene.anims.generateFrameNumbers('mouse', {
+                start: 0,
+                end: 0,
+            }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.scene.anims.create({
+            key: 'sneak',
+            frames: this.scene.anims.generateFrameNumbers('mouse', {
+                start: 0,
+                end: 2,
+            }),
+            frameRate: 5,
+            repeat: 3
+        });
     }
 
     update() {
@@ -52,7 +82,6 @@ export default class Mouse extends Phaser.GameObjects.Sprite {
         else {
             // make sneaking very ocasionaly
             if (Math.random() * 1010 > 1008) {
-                console.log('SNEAK')
                 this.play('sneak');
             }
         }
