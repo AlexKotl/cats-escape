@@ -8,7 +8,7 @@ var config = {
     type: Phaser.CANVAS,
     scale: {
         mode: Phaser.Scale.FIT,
-        parent: 'phaser-example',
+        parent: 'the-game',
         autoCenter: Phaser.Scale.CENTER_BOTH,
         width: 150,
         height: 256,

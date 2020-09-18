@@ -2,17 +2,25 @@
 <html>
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <script src="http://labs.phaser.io/build/phaser-arcade-physics.min.js"></script>
     <title>Cats Escape</title>
 </head>
 <style>
     body {
-        background-color: gray;
+        background-color: black;
         margin: 0;
+        font-family: bitmapFont;
+        color: white;
+        font-size: 11px;
     }
-    canvas {
-        margin: 0;
-        height: 100%;
+    a {
+        color: white;
+        text-decoration: underline;
+    }
+    #the-game {
+        max-height: 800px;
+        margin: auto;
     }
      @font-face {
         font-family: bitmapFont;
@@ -21,9 +29,24 @@
         font-weight: normal;
     }
 </style>
+<script>
+    function play() {
+        console.log('seting')
+        document.getElementById('the-game').style.setProperty('display', 'block')
+    }
+</script>
 <body>
     <div style="font-family: bitmapFont; position:absolute; left:-1000px; visibility:hidden;">.</div>
 
+    <div id="the-game" style="display: none"></div>
+
+    <center>
+        <h2>Cats Escape</h2>
+        Developer: <a href="https://www.facebook.com/kotl.alex" rel="nofollow">Ole Kotliarov</a>
+        <br><br>
+        <button onclick="play(); this.style.display = 'none'" style="width: 200px; height: 40px">Play the Game</button>
+        <br><br>
+    </center>
 </body>
 
 </html>
