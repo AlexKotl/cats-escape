@@ -12,7 +12,8 @@ export default class GameScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('level', 'assets/sprites/level.png');
+        this.load.image('level', 'assets/sprites/level/level.png');
+        this.load.image('level-sky', 'assets/sprites/level/level-sky.png');
         this.load.image('board', 'assets/sprites/board.png');
         this.load.image('menu-button', 'assets/sprites/menu/menu-button.png');
         this.load.image('menu-restart', 'assets/sprites/menu/menu-restart.png');
@@ -35,7 +36,8 @@ export default class GameScene extends Phaser.Scene {
         this.cameraOffset = {x: 16, y: 87};
         this.cameras.main.scrollX = -this.cameraOffset.x;
         this.cameras.main.scrollY = -this.cameraOffset.y;
-        this.add.sprite(-16, -87, 'level').setOrigin(0)//.setScale(2); // set offset for room start
+        this.skyBackground = this.add.tileSprite(-16, -87, 148, 256, 'level-sky').setOrigin(0);
+        this.add.sprite(-16, -87, 'level').setOrigin(0); // set offset for room start
 
         // level number
         this.add.text(38, -59, "Level: " + this.scene.settings.data.level, {font: "11px Arial"});
@@ -213,6 +215,7 @@ export default class GameScene extends Phaser.Scene {
 
     update() {
         this.mouse.update();
+        this.skyBackground.tilePositionX += 0.005;
     }
 
 }
