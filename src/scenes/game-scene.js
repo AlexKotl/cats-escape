@@ -88,8 +88,8 @@ export default class GameScene extends Phaser.Scene {
         this.anims.create({
             key: 'run',
             frames: this.anims.generateFrameNumbers('mouse', {
-                start: 1,
-                end: 3,
+                start: 3,
+                end: 6,
             }),
             frameRate: 10,
             yoyo: false,
@@ -103,6 +103,15 @@ export default class GameScene extends Phaser.Scene {
             }),
             frameRate: 5,
             repeat: -1
+        });
+        this.anims.create({
+            key: 'sneak',
+            frames: this.anims.generateFrameNumbers('mouse', {
+                start: 0,
+                end: 2,
+            }),
+            frameRate: 5,
+            repeat: 3
         });
 
         this.input.on('dragstart', (pointer, obj) => {
