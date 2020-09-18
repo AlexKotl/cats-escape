@@ -56,6 +56,7 @@ module.exports = env => {
             }),
             new CopyPlugin([
                 { from: './assets/sprites', to: './assets/sprites' },
+                { from: './assets/fonts', to: './assets/fonts' },
             ]),
             // new WebpackFreeTexPacker(path.resolve(__dirname, 'assets/tiles'), 'assets', {
             //     textureName: 'tilemap',

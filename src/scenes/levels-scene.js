@@ -24,8 +24,8 @@ export default class LevelsScene extends Phaser.Scene {
 
         this.skyBackground = this.add.tileSprite(0, 0, 150, 250, 'house-sky').setOrigin(0);
 
-        this.add.text(18, 8, "Select the room:", {
-            font: '10px Arial',
+        this.add.text(32, 8, "Select the room", {
+            font: '5px bitmapFont',
         });
 
         const spriteHouseRoof = this.add.sprite(0, houseOffset, 'house-roof').setOrigin(0);
@@ -39,17 +39,18 @@ export default class LevelsScene extends Phaser.Scene {
             for (let i = 0; i < 3; i++) {
                 x = 32 + i * 31;
                 y = houseOffset + spriteHouseRoof.height + houseLevelHeight * floor;
-                let sprite = this.add.sprite(x, y, 'house-window-' + (progress[level] ? 'on' : 'off')).setOrigin(0);
-                sprite.alpha = isAvailable ? 1 : 0.8;
+                let sprite = this.add.sprite(x, y, 'house-window-' + (isAvailable && !progress[level] ? 'on' : 'off')).setOrigin(0);
+                // sprite.alpha = isAvailable ? 1 : 0.8;
                 if (isAvailable) {
                     sprite.setInteractive();
                 }
                 sprite.levelNumber = '' + level;
 
                 if (isAvailable) {
-                    this.add.text(x + (level > 9 ? 4 : 7), y + 7, level, {
-                        font: '12px Arial',
-                        color: isAvailable ? '#000' : '#444',
+                    this.add.text(x + (level > 9 ? 4 : 8), y + 9, level, {
+                        fontFamily: 'bitmapFont',
+                        fontSize: '5px',
+                        color: progress[level] ? '#693d2f' : '#444',
                         boundsAlignH: "center",
                     });
                 }

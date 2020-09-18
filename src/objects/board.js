@@ -58,7 +58,6 @@ export default class Board {
     getSpriteByCoords(x, y) {
         let mapCoords = this.getMapPosition(x, y);
         const figureIndex = this.cells[mapCoords.y][mapCoords.x];
-        console.log(this.cells)
         if (figureIndex !== 0) {
             return this.scene.level.figures[figureIndex].sprite;
         }

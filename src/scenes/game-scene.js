@@ -40,7 +40,7 @@ export default class GameScene extends Phaser.Scene {
         this.add.sprite(-16, -87, 'level').setOrigin(0); // set offset for room start
 
         // level number
-        this.add.text(42, -69, "Level: " + this.scene.settings.data.level, {font: "11px Arial"});
+        this.add.text(44, -65, "Level: " + this.scene.settings.data.level, {font: "5px bitmapFont"});
 
         const menuButton = this.add.sprite(-10, -70, 'menu-button').setOrigin(0).setInteractive().on('pointerup', () => {
             this.scene.start('LevelsScene');
