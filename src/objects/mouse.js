@@ -49,11 +49,12 @@ export default class Mouse extends Phaser.GameObjects.Sprite {
             this.y += this.speed;
 
         }
-
-        // make sneaking very ocasionaly
-        if (Math.random() * 1010 > 1008) {
-            console.log('SNEAK')
-            this.play('sneak');
+        else {
+            // make sneaking very ocasionaly
+            if (Math.random() * 1010 > 1008) {
+                console.log('SNEAK')
+                this.play('sneak');
+            }
         }
 
     }
