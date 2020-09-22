@@ -7,7 +7,6 @@ export default class Mouse extends Phaser.GameObjects.Sprite {
         this.board = config.board;
         this.isRunning = false;
         this.isReturning = false;
-        this.speed = -0.6;
 
         this.setInteractive();
         this.setOrigin(0.5, 0);
@@ -49,7 +48,11 @@ export default class Mouse extends Phaser.GameObjects.Sprite {
         });
     }
 
-    update() {
+    update(time, delta) {
+        if (this.speed === undefined) {
+            this.speed = -0.1 * delta;
+        }
+
         if (this.isRunning) {
             const mousePos = this.board.getMapPosition(this.x, this.y);
 
@@ -64,6 +67,7 @@ export default class Mouse extends Phaser.GameObjects.Sprite {
             if (mousePos.y >= 7 && this.speed > 0) {
                 console.log('HOME!');
                 this.isRunning = false;
+                // reverse speed and direction
                 this.speed *= -1;
                 this.scaleY *= -1;
                 this.play('idle');
