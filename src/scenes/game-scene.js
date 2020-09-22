@@ -195,9 +195,9 @@ export default class GameScene extends Phaser.Scene {
         }, 2000);
     }
 
-    update() {
+    update(time, delta) {
         this.mouse.update();
-        this.skyBackground.tilePositionX += 0.005;
+        this.skyBackground.tilePositionX += delta * 0.002;
     }
 
 }

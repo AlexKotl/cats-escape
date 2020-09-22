@@ -80,7 +80,7 @@ export default class LevelsScene extends Phaser.Scene {
        });
     }
 
-    update() {
-        this.skyBackground.tilePositionX += 0.005;
+    update(time, delta) {
+        this.skyBackground.tilePositionX += delta * 0.002;
     }
 }
