@@ -7,12 +7,17 @@ export default class LevelsScene extends Phaser.Scene {
     preload() {
         //this.load.image('clew', 'assets/sprites/clew.png');
         this.load.image('house-basement', 'assets/sprites/house/house-basement.png');
+        this.load.image('house-basement-open', 'assets/sprites/house/house-basement-open.png');
         this.load.image('house-level', 'assets/sprites/house/house-level.png');
         this.load.image('house-roof', 'assets/sprites/house/house-roof.png');
         this.load.image('house-window-off', 'assets/sprites/house/house-window-off.png');
         this.load.image('house-window-on', 'assets/sprites/house/house-window-on.png');
         this.load.image('house-road', 'assets/sprites/house/house-road.png');
         this.load.image('house-sky', 'assets/sprites/house/house-sky.png');
+        const mouseSprite = this.load.spritesheet('mouse', 'assets/sprites/mouse.png', {
+            frameWidth: 16,
+            frameHeight: 16,
+        });
     }
 
     create() {
@@ -21,10 +26,11 @@ export default class LevelsScene extends Phaser.Scene {
         const houseOffset = 14;
 
         const progress = JSON.parse(localStorage.getItem('progress')) || {};
+        const isWin = progress[totalLevels] && progress[totalLevels].completed;
 
         this.skyBackground = this.add.tileSprite(0, 0, 150, 250, 'house-sky').setOrigin(0);
 
-        this.add.text(32, 8, "Select the room", {
+        this.add.text(32, 8, isWin ? "You have escaped!" : "Select the room", {
             font: '5px bitmapFont',
         });
 
@@ -63,8 +69,21 @@ export default class LevelsScene extends Phaser.Scene {
                 level++;
             }
         }
-        this.add.sprite(0, houseOffset + spriteHouseRoof.height + (spriteHouseLevel.height * floorsCount + 32), 'house-road').setOrigin(0);
-        this.add.sprite(0, houseOffset + spriteHouseRoof.height + (spriteHouseLevel.height * floorsCount), 'house-basement').setOrigin(0);
+        const groundPosY = houseOffset + spriteHouseRoof.height + (spriteHouseLevel.height * floorsCount);
+        this.add.sprite(0, groundPosY + 32, 'house-road').setOrigin(0);
+
+        if (isWin) {
+            this.add.sprite(0, groundPosY, 'house-basement-open').setOrigin(0);
+            this.add.sprite(82, groundPosY + 28, 'mouse').setOrigin(0); // place mouse in the door
+            this.add.text(32, groundPosY, "more levels \ncoming...", {
+                font: '5px bitmapFont',
+                color: '#242629'
+            });
+        }
+        else {
+            this.add.sprite(0, groundPosY, 'house-basement').setOrigin(0);
+        }
+
 
         this.input.on('pointerup', (pointer, obj) => {
             if (obj[0] === undefined) {
