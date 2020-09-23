@@ -30,6 +30,8 @@ export default class GameScene extends Phaser.Scene {
             frameHeight: 16,
         });
         this.load.image('win-text', 'assets/sprites/menu/win.png');
+
+        var r = this.load.audio('meow', ['assets/sounds/meow.mp3']);
     }
 
     create() {
@@ -39,6 +41,9 @@ export default class GameScene extends Phaser.Scene {
         this.cameras.main.scrollY = -this.cameraOffset.y;
         this.skyBackground = this.add.tileSprite(-16, -87, 148, 256, 'level-sky').setOrigin(0);
         this.add.sprite(-16, -87, 'level').setOrigin(0); // set offset for room start
+
+        var fx = this.sound.add('meow');
+        fx.play();
 
         // level number
         this.add.text(44, -65, "Level: " + this.scene.settings.data.level, {font: "5px bitmapFont"});
@@ -87,6 +92,7 @@ export default class GameScene extends Phaser.Scene {
 
         this.input.on('dragstart', (pointer, obj) => {
             this.dragSprite = this.board.getSpriteByCoords(pointer.x - this.cameraOffset.x, pointer.y - this.cameraOffset.y)
+
 
             if (this.mouse.isRunning || !this.dragSprite) {
                 return false;

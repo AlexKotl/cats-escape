@@ -55,6 +55,7 @@ module.exports = env => {
                 }
             }),
             new CopyPlugin([
+                { from: './assets/sounds', to: './assets/sounds' },
                 { from: './assets/sprites', to: './assets/sprites' },
                 { from: './assets/fonts', to: './assets/fonts' },
             ]),
