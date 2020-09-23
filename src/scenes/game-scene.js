@@ -31,7 +31,10 @@ export default class GameScene extends Phaser.Scene {
         });
         this.load.image('win-text', 'assets/sprites/menu/win.png');
 
-        var r = this.load.audio('meow', ['assets/sounds/meow.mp3']);
+        // load sounds
+        for (var i = 1; i <= 12; i++) {
+            this.load.audio('meow' + i, ['assets/sounds/meows/meow_' + i + '.mp3']);
+        }
     }
 
     create() {
@@ -42,8 +45,10 @@ export default class GameScene extends Phaser.Scene {
         this.skyBackground = this.add.tileSprite(-16, -87, 148, 256, 'level-sky').setOrigin(0);
         this.add.sprite(-16, -87, 'level').setOrigin(0); // set offset for room start
 
-        var fx = this.sound.add('meow');
-        fx.play();
+        var meows = [];
+        for (var i = 1; i <= 12; i++) {
+            meows[i] = this.sound.add('meow' + i);
+        }
 
         // level number
         this.add.text(44, -65, "Level: " + this.scene.settings.data.level, {font: "5px bitmapFont"});
@@ -93,6 +98,10 @@ export default class GameScene extends Phaser.Scene {
         this.input.on('dragstart', (pointer, obj) => {
             this.dragSprite = this.board.getSpriteByCoords(pointer.x - this.cameraOffset.x, pointer.y - this.cameraOffset.y)
 
+            // play with probability 25%
+            if (Math.random() > 0.75) {
+                meows[this.randomInteger(1, 12)].play();
+            }
 
             if (this.mouse.isRunning || !this.dragSprite) {
                 return false;
@@ -205,6 +214,10 @@ export default class GameScene extends Phaser.Scene {
     update(time, delta) {
         this.mouse.update(time, delta);
         this.skyBackground.tilePositionX += delta * 0.002;
+    }
+
+    randomInteger(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
 }
