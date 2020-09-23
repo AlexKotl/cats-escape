@@ -5,6 +5,7 @@ export default class Mouse extends Phaser.GameObjects.Sprite {
 
         // sounds
         this.screamSound = this.scene.sound.add('scream');
+        this.runSound = this.scene.sound.add('run');
 
         this.start = {x: config.x, y: config.y};
         this.board = config.board;
@@ -18,6 +19,7 @@ export default class Mouse extends Phaser.GameObjects.Sprite {
         this.on('pointerdown', (pointer) => {
             this.isRunning = true;
             this.play('run');
+            this.runSound.play();
         });
 
         // animations
@@ -74,6 +76,7 @@ export default class Mouse extends Phaser.GameObjects.Sprite {
                 this.speed *= -1;
                 this.scaleY *= -1;
                 this.play('idle');
+                this.runSound.stop();
             }
 
             // turn back
