@@ -18,6 +18,9 @@ export default class LevelsScene extends Phaser.Scene {
             frameWidth: 16,
             frameHeight: 16,
         });
+
+        // load sounds
+        this.load.audio('door-sound', ['assets/sounds/door-open.mp3']);
     }
 
     create() {
@@ -92,6 +95,9 @@ export default class LevelsScene extends Phaser.Scene {
 
             const level = obj[0].levelNumber;
             if (level !== undefined) {
+                var doorSound = this.sound.add('door-sound');
+                doorSound.play();
+
                 this.scene.start('GameScene', {
                     level: level,
                 });

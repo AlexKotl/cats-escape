@@ -33,6 +33,7 @@ export default class GameScene extends Phaser.Scene {
 
         // load sounds
         this.load.audio('scream', ['assets/sounds/scream.mp3']);
+        this.load.audio('exit', ['assets/sounds/exit.mp3']);
         this.load.audio('door-close-sound', ['assets/sounds/door-close.mp3']);
         for (var i = 1; i <= 12; i++) {
             this.load.audio('meow' + i, ['assets/sounds/meows/meow_' + i + '.mp3']);
@@ -211,6 +212,8 @@ export default class GameScene extends Phaser.Scene {
             ease: 'Power1',
             duration: 1000,
         });
+
+        this.sound.add('exit').play();
 
         setTimeout(() => {
             this.scene.start('LevelsScene');
