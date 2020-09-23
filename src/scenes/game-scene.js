@@ -32,6 +32,8 @@ export default class GameScene extends Phaser.Scene {
         this.load.image('win-text', 'assets/sprites/menu/win.png');
 
         // load sounds
+        this.load.audio('scream', ['assets/sounds/scream.mp3']);
+        this.load.audio('door-close-sound', ['assets/sounds/door-close.mp3']);
         for (var i = 1; i <= 12; i++) {
             this.load.audio('meow' + i, ['assets/sounds/meows/meow_' + i + '.mp3']);
         }
@@ -45,6 +47,8 @@ export default class GameScene extends Phaser.Scene {
         this.skyBackground = this.add.tileSprite(-16, -87, 148, 256, 'level-sky').setOrigin(0);
         this.add.sprite(-16, -87, 'level').setOrigin(0); // set offset for room start
 
+        var doorSound = this.sound.add('door-close-sound');
+
         var meows = [];
         for (var i = 1; i <= 12; i++) {
             meows[i] = this.sound.add('meow' + i);
@@ -54,11 +58,13 @@ export default class GameScene extends Phaser.Scene {
         this.add.text(44, -65, "Level: " + this.scene.settings.data.level, {font: "5px bitmapFont"});
 
         const menuButton = this.add.sprite(-10, -70, 'menu-button').setOrigin(0).setInteractive().on('pointerup', () => {
+            doorSound.play();
             this.scene.start('LevelsScene');
         });
 
         const restartButton = this.add.sprite(100, -70, 'menu-restart').setOrigin(0).setInteractive().on('pointerup', () => {
-            this.scene.restart()
+            doorSound.play();
+            this.scene.restart();
         });
 
         this.graphics = this.add.graphics();

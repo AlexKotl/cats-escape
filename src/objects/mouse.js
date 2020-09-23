@@ -3,6 +3,9 @@ export default class Mouse extends Phaser.GameObjects.Sprite {
         super(config.scene, config.x, config.y, config.key);
         config.scene.add.existing(this);
 
+        // sounds
+        this.screamSound = this.scene.sound.add('scream');
+
         this.start = {x: config.x, y: config.y};
         this.board = config.board;
         this.isRunning = false;
@@ -78,6 +81,7 @@ export default class Mouse extends Phaser.GameObjects.Sprite {
                 console.log("Turn back", this.board.size.height, mousePos.y, this.board.isAllowed(mousePos.x , mousePos.y))
                 this.speed *= -1;
                 this.scaleY *= -1;
+                this.screamSound.play();
             }
 
             this.y += this.speed;
