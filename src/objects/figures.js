@@ -37,6 +37,9 @@ const figures = {
     cat17: {
         shape: [[1], [1]],
     },
+    cat18: {
+        shape: [[0, 1], [1, 1], [1, 0]],
+    },
 };
 
 export default figures;

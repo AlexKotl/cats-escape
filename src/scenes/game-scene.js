@@ -24,6 +24,7 @@ export default class GameScene extends Phaser.Scene {
         this.load.image('cat15', 'assets/sprites/cats/cat15.png');
         this.load.image('cat16', 'assets/sprites/cats/cat16.png');
         this.load.image('cat17', 'assets/sprites/cats/cat17.png');
+        this.load.image('cat18', 'assets/sprites/cats/cat18.png');
         const mouseSprite = this.load.spritesheet('mouse', 'assets/sprites/mouse.png', {
             frameWidth: 16,
             frameHeight: 16,
