@@ -7,6 +7,7 @@ export default class IntroScene extends Phaser.Scene {
         this.load.image('cats', 'assets/sprites/menu/cats.png');
         this.load.image('text', 'assets/sprites/menu/text.png');
         this.load.image('menu-mouse', 'assets/sprites/menu/mouse.png');
+        this.load.audio('music', ['assets/sounds/music-intro.mp3']);
     }
 
     create() {
@@ -15,6 +16,9 @@ export default class IntroScene extends Phaser.Scene {
         this.add.sprite(x, y, 'cats').setScale(1.5);
         const text = this.add.sprite(x, y, 'text').setAlpha(0).setScale(1.5);
         const mouse = this.add.sprite(-x, y, 'menu-mouse').setScale(1.5);
+
+        var music = this.sound.add('music');
+        music.play();
 
         this.cameras.main.setBackgroundColor('#fff');
 
