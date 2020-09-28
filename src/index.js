@@ -6,15 +6,17 @@ import LevelEditorScene from './scenes/level-editor-scene';
 
 var config = {
     type: Phaser.CANVAS,
+    width: 150,
+    height: 256,
+    //parent: null,
     scale: {
-        mode: Phaser.Scale.FIT,
+        mode: Phaser.Scale.ENVELOP,
         parent: 'the-game',
         autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: 150,
-        height: 256,
+
     },
     pixelArt: true,
-    zoom: 4,
+    //zoom: 4,
     physics: {
         default: 'arcade',
         arcade: {

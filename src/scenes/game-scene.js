@@ -57,14 +57,14 @@ export default class GameScene extends Phaser.Scene {
         }
 
         // level number
-        this.add.text(44, -65, "Level: " + this.scene.settings.data.level, {font: "5px bitmapFont"});
+        this.add.text(1, -22, "Level: " + this.scene.settings.data.level, {font: "5px bitmapFont"});
 
-        const menuButton = this.add.sprite(-10, -70, 'menu-button').setOrigin(0).setInteractive().on('pointerup', () => {
+        const menuButton = this.add.sprite(0, -60, 'menu-button').setOrigin(0).setInteractive().on('pointerup', () => {
             doorSound.play();
             this.scene.start('LevelsScene');
         });
 
-        const restartButton = this.add.sprite(100, -70, 'menu-restart').setOrigin(0).setInteractive().on('pointerup', () => {
+        const restartButton = this.add.sprite(96, -60, 'menu-restart').setOrigin(0).setInteractive().on('pointerup', () => {
             doorSound.play();
             this.scene.restart();
         });

@@ -14,3 +14,6 @@ cd mobile_platforms
 cp -R ../public/* www/ && cordova run android --device
 ```
 Or just `npm run run-android`
+
+### Misc
+Scaling example: https://github.com/yandeu/phaser3-scaling-resizing-example

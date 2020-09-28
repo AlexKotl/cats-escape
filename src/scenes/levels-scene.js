@@ -24,6 +24,9 @@ export default class LevelsScene extends Phaser.Scene {
     }
 
     create() {
+        const canvas = this.sys.game.canvas;
+        console.log('canv', this.scale)
+        console.log('camera', this.cameras.main)
         const totalLevels = 12;
         const floorsCount = Math.ceil(totalLevels / 3);
         const houseOffset = 14;
