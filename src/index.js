@@ -6,7 +6,7 @@ import LevelEditorScene from './scenes/level-editor-scene';
 
 var config = {
     type: Phaser.CANVAS,
-    width: 150,
+    width: 144,
     height: 256,
     //parent: null,
     scale: {
