@@ -21,5 +21,14 @@ Or just `npm run run-android`
 - make IPA using xcode: Product -> Archive
 - follow steps in xcode to upload to itunes connect
 
-### Misc
+Hide status bar on iOS - add to .plist:
+```
+<key>UIStatusBarHidden</key>
+<true/>
+<key>UIViewControllerBasedStatusBarAppearance</key>
+<false/>
+```
+
+### Misc Docs
 Scaling example: https://github.com/yandeu/phaser3-scaling-resizing-example
+How to fit on iPhone X: https://blog.phonegap.com/displaying-a-phonegap-app-correctly-on-the-iphone-x-c4a85664c493

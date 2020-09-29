@@ -25,8 +25,6 @@ export default class LevelsScene extends Phaser.Scene {
 
     create() {
         const canvas = this.sys.game.canvas;
-        console.log('canv', this.scale)
-        console.log('camera', this.cameras.main)
         const totalLevels = 12;
         const floorsCount = Math.ceil(totalLevels / 3);
         const houseOffset = 14;
@@ -36,12 +34,12 @@ export default class LevelsScene extends Phaser.Scene {
 
         this.skyBackground = this.add.tileSprite(0, 0, 150, 250, 'house-sky').setOrigin(0);
 
-        this.add.text(32, 8, isWin ? "You have escaped!" : "Select the room", {
-            font: '5px bitmapFont',
-        });
-
         const spriteHouseRoof = this.add.sprite(0, houseOffset, 'house-roof').setOrigin(0);
         const houseLevelHeight = this.add.sprite(500, 500, 'house-level').height; // load sprite just to get proper height
+
+        this.add.text(32, 18, isWin ? "You have escaped!" : "Select the room", {
+            font: '5px bitmapFont',
+        });
 
         var level = 1;
         var x, y;
