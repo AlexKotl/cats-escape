@@ -25,6 +25,8 @@ export default class GameScene extends Phaser.Scene {
         this.load.image('cat16', 'assets/sprites/cats/cat16.png');
         this.load.image('cat17', 'assets/sprites/cats/cat17.png');
         this.load.image('cat18', 'assets/sprites/cats/cat18.png');
+        this.load.image('hint-cat', 'assets/sprites/menu/hint-move-cat.png');
+        this.load.image('hint-mouse', 'assets/sprites/menu/hint-run-mouse.png');
         const mouseSprite = this.load.spritesheet('mouse', 'assets/sprites/mouse.png', {
             frameWidth: 16,
             frameHeight: 16,
@@ -42,6 +44,7 @@ export default class GameScene extends Phaser.Scene {
     }
 
     create() {
+        let levelNo = this.scene.settings.data.level;
         // setup camera and background
         this.cameraOffset = {x: 16, y: 87};
         this.cameras.main.scrollX = -this.cameraOffset.x;
@@ -57,7 +60,7 @@ export default class GameScene extends Phaser.Scene {
         }
 
         // level number
-        this.add.text(1, -22, "Level: " + this.scene.settings.data.level, {font: "5px bitmapFont"});
+        this.add.text(1, -22, "Level: " + levelNo, {font: "5px bitmapFont"});
 
         const menuButton = this.add.sprite(0, -60, 'menu-button').setOrigin(0).setInteractive().on('pointerup', () => {
             doorSound.play();
@@ -71,7 +74,7 @@ export default class GameScene extends Phaser.Scene {
 
         this.graphics = this.add.graphics();
 
-        this.level = JSON.parse(JSON.stringify( levelsData[this.scene.settings.data.level])); // clone object that weird style
+        this.level = JSON.parse(JSON.stringify( levelsData[levelNo] )); // clone object that weird style
 
         this.board = new Board({
             blockSize: 16,
@@ -102,6 +105,12 @@ export default class GameScene extends Phaser.Scene {
             y: this.board.blockSize * 7,
             key: 'mouse',
         });
+
+        // add hints for first level
+        if (levelNo == 1) {
+            this.hintCat = this.add.sprite(-5, -5, 'hint-cat').setOrigin(0);
+            this.hintMouse = this.add.sprite(18, 80, 'hint-mouse').setOrigin(0);
+        }
 
         this.input.on('dragstart', (pointer, obj) => {
             this.dragSprite = this.board.getSpriteByCoords(pointer.x - this.cameraOffset.x, pointer.y - this.cameraOffset.y)
@@ -192,6 +201,10 @@ export default class GameScene extends Phaser.Scene {
             this.level.figures[this.draggedFigureIndex].pos.x = mapPos.x;
             this.level.figures[this.draggedFigureIndex].pos.y = mapPos.y;
             this.board.generateBoard();
+
+            if (levelNo == 1) {
+                this.hintCat.visible = false;
+            }
         });
 
     }
@@ -224,6 +237,11 @@ export default class GameScene extends Phaser.Scene {
     update(time, delta) {
         this.mouse.update(time, delta);
         this.skyBackground.tilePositionX += delta * 0.002;
+
+        // hide first level hint
+        if (this.scene.settings.data.level == 1 && this.mouse.isRunning) {
+            this.hintMouse.visible = false;
+        }
     }
 
     randomInteger(min, max) {
