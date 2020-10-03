@@ -1,6 +1,6 @@
 const levelsData = {
     // simple
-    '1': {"figures":[{"name":"cat13","pos":{"x":2,"y":1}}]},
+    '1': {"figures":[{"name":"cat13","pos":{"x":2,"y":3}}]},
     // more cats
     '2': {"figures":[{"name":"cat12","pos":{"x":2,"y":1}},{"name":"cat18","pos":{"x":2,"y":2}},{"name":"cat14","pos":{"x":3,"y":4}},{"name":"cat11","pos":{"x":0,"y":2}},{"name":"cat13","pos":{"x":4,"y":3}}]},
     // easy
