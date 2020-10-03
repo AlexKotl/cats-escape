@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import Board from '../objects/board';
 import Mouse from '../objects/mouse';
 import levelsData from '../objects/levels-data';
+var gameanalytics = require('gameanalytics');
 
 const DEBUG_MODE = false;
 
@@ -232,6 +233,8 @@ export default class GameScene extends Phaser.Scene {
         setTimeout(() => {
             this.scene.start('LevelsScene');
         }, 2000);
+
+        gameanalytics.GameAnalytics.addProgressionEvent(gameanalytics.EGAProgressionStatus.Start, "house01", this.scene.settings.data.level);
     }
 
     update(time, delta) {
