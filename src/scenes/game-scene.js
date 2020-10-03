@@ -208,6 +208,8 @@ export default class GameScene extends Phaser.Scene {
             }
         });
 
+        gameanalytics.GameAnalytics.addProgressionEvent(gameanalytics.EGAProgressionStatus.Start, "house01", this.scene.settings.data.level);
+
     }
 
     finish() {
@@ -234,7 +236,7 @@ export default class GameScene extends Phaser.Scene {
             this.scene.start('LevelsScene');
         }, 2000);
 
-        gameanalytics.GameAnalytics.addProgressionEvent(gameanalytics.EGAProgressionStatus.Start, "house01", this.scene.settings.data.level);
+        gameanalytics.GameAnalytics.addProgressionEvent(gameanalytics.EGAProgressionStatus.Complete, "house01", this.scene.settings.data.level);
     }
 
     update(time, delta) {
