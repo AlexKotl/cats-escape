@@ -109,7 +109,7 @@ export default class GameScene extends Phaser.Scene {
         // add hints for first level
         if (levelNo == 1) {
             this.hintCat = this.add.sprite(-5, -5, 'hint-cat').setOrigin(0);
-            this.hintCat = this.add.sprite(18, 80, 'hint-mouse').setOrigin(0);
+            this.hintMouse = this.add.sprite(18, 80, 'hint-mouse').setOrigin(0);
         }
 
         this.input.on('dragstart', (pointer, obj) => {
@@ -201,6 +201,10 @@ export default class GameScene extends Phaser.Scene {
             this.level.figures[this.draggedFigureIndex].pos.x = mapPos.x;
             this.level.figures[this.draggedFigureIndex].pos.y = mapPos.y;
             this.board.generateBoard();
+
+            if (levelNo == 1) {
+                this.hintCat.visible = false;
+            }
         });
 
     }
@@ -233,6 +237,11 @@ export default class GameScene extends Phaser.Scene {
     update(time, delta) {
         this.mouse.update(time, delta);
         this.skyBackground.tilePositionX += delta * 0.002;
+
+        // hide first level hint
+        if (this.scene.settings.data.level == 1 && this.mouse.isRunning) {
+            this.hintMouse.visible = false;
+        }
     }
 
     randomInteger(min, max) {
