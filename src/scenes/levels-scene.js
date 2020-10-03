@@ -77,7 +77,9 @@ export default class LevelsScene extends Phaser.Scene {
         this.add.sprite(0, groundPosY + 32, 'house-road').setOrigin(0);
 
         if (isWin) {
-            this.add.sprite(0, groundPosY, 'house-basement-open').setOrigin(0);
+            this.add.sprite(0, groundPosY, 'house-basement-open').setOrigin(0).setInteractive().on('pointerdown', (pointer) => {
+                this.scene.start('CompleteScene');
+            });
             this.add.sprite(82, groundPosY + 28, 'mouse').setOrigin(0); // place mouse in the door
             this.add.text(32, groundPosY, "more levels \ncoming...", {
                 font: '5px bitmapFont',

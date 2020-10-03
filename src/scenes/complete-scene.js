@@ -20,6 +20,10 @@ export default class CompleteScene extends Phaser.Scene {
                 useAdvancedWrap: true
             }
         });
+        this.add.text(20, 150, "akotl256@gmail.com", {
+            font: '5px bitmapFont',
+            color: '#383a3b',
+        });
 
         // put some delay, so user wont be able to skip by mistake
         setTimeout(() => {
