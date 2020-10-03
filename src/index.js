@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import IntroScene from './scenes/intro-scene';
 import LevelsScene from './scenes/levels-scene';
 import GameScene from './scenes/game-scene';
+import CompleteScene from './scenes/complete-scene';
 import LevelEditorScene from './scenes/level-editor-scene';
 var gameanalytics = require('gameanalytics');
 
@@ -24,7 +25,13 @@ var config = {
             debug: true,
         }
     },
-    scene: [/*IntroScene,*/ LevelsScene, GameScene, LevelEditorScene]
+    scene: [
+        // IntroScene,
+        LevelsScene,
+        GameScene,
+        LevelEditorScene,
+        CompleteScene
+    ]
 };
 
 gameanalytics.GameAnalytics.setEnabledInfoLog(true);

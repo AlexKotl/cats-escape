@@ -233,7 +233,7 @@ export default class GameScene extends Phaser.Scene {
         this.sound.add('exit').play();
 
         setTimeout(() => {
-            this.scene.start('LevelsScene');
+            this.scene.start(this.scene.settings.data.level == 12 ? 'CompleteScene' : 'LevelsScene');
         }, 2000);
 
         gameanalytics.GameAnalytics.addProgressionEvent(gameanalytics.EGAProgressionStatus.Complete, "house01", this.scene.settings.data.level);
