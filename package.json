@@ -4,6 +4,7 @@
   "description": "",
   "main": "game.js",
   "dependencies": {
+    "gameanalytics": "^4.1.2",
     "phaser": "^3.16.2",
     "webpack": "^4.30.0"
   },
