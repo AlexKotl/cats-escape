@@ -1,7 +1,7 @@
 /public
 www
 /mobile_platforms/plugins
-/mobile_platforms/platforms
+/mobile_platforms/platforms/android
 /mobile_platforms/package-lock.json
 /package-lock.json
 /node_modules

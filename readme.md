@@ -15,6 +15,10 @@ cp -R ../public/* www/ && cordova run android --device
 ```
 Or just `npm run run-android`
 
+#### Generate icons for platforms
+Install `cordova-icon`, then run command:
+`cordova-icon --config=config.xml --icon=res/icon.png`
+
 #### Build iOS using Cordova
 - make distribution profile and resolve all other certificate issues
 - make sure no certificate duplicates in keychain
