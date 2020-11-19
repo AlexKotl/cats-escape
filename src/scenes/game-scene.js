@@ -61,7 +61,7 @@ export default class GameScene extends Phaser.Scene {
         }
 
         // level number
-        this.add.text(1, -22, "Level: " + levelNo, {font: "5px bitmapFont"});
+        this.add.text(1, -22, "Level: " + levelNo, {font: "8px bitmapFont"});
 
         const menuButton = this.add.sprite(0, -60, 'menu-button').setOrigin(0).setInteractive().on('pointerup', () => {
             doorSound.play();

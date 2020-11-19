@@ -13,7 +13,7 @@ export default class CompleteScene extends Phaser.Scene {
         this.skyBackground = this.add.tileSprite(0, 0, 150, 250, 'house-sky').setOrigin(0);
 
         this.add.text(20, 54, "Congratulations! \nYou have passed all levels!\n\n\nPlease give us feedback and we will add more cats and levels very soon...", {
-            font: '5px bitmapFont',
+            font: '8px bitmapFont',
             color: '#fff',
             wordWrap: {
                 width: 110,

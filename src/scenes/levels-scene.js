@@ -37,8 +37,8 @@ export default class LevelsScene extends Phaser.Scene {
         const spriteHouseRoof = this.add.sprite(0, houseOffset, 'house-roof').setOrigin(0);
         const houseLevelHeight = this.add.sprite(500, 500, 'house-level').height; // load sprite just to get proper height
 
-        this.add.text(32, 18, isWin ? "You have escaped!" : "Select the room", {
-            font: '5px bitmapFont',
+        let t = this.add.text(32, 18, isWin ? "You have escaped!" : "Select the room", {
+            font: '8px bitmapFont',
         });
 
         var level = 1;
@@ -59,7 +59,7 @@ export default class LevelsScene extends Phaser.Scene {
                 if (isAvailable) {
                     this.add.text(x + (level > 9 ? 4 : 8), y + 9, level, {
                         fontFamily: 'bitmapFont',
-                        fontSize: '5px',
+                        fontSize: '8px',
                         color: progress[level] ? '#693d2f' : '#444',
                         boundsAlignH: "center",
                     });
@@ -82,7 +82,7 @@ export default class LevelsScene extends Phaser.Scene {
             });
             this.add.sprite(82, groundPosY + 28, 'mouse').setOrigin(0); // place mouse in the door
             this.add.text(32, groundPosY, "more levels \ncoming...", {
-                font: '5px bitmapFont',
+                font: '8px bitmapFont',
                 color: '#242629'
             });
         }
