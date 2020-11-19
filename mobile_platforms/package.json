@@ -15,7 +15,7 @@
   "author": "Apache Cordova Team",
   "license": "Apache-2.0",
   "dependencies": {
-    "cordova-android": "^8.0.0",
+    "cordova-android": "^8.1.0",
     "cordova-ios": "^5.1.1",
     "cordova-plugin-device": "git+https://github.com/apache/cordova-plugin-device.git",
     "cordova-plugin-dialogs": "git+https://github.com/apache/cordova-plugin-dialogs.git",
@@ -36,8 +36,8 @@
       "cordova-plugin-wkwebviewxhrfix": {}
     },
     "platforms": [
-      "android",
-      "ios"
+      "ios",
+      "android"
     ]
   }
 }

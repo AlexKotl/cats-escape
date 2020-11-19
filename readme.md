@@ -33,6 +33,13 @@ Hide status bar on iOS - add to .plist:
 <false/>
 ```
 
+#### Android platform
+If no emulator found - export paths:
+```
+export ANDROID_SDK_ROOT=/Users/[username]/Library/Android/sdk
+export PATH=$ANDROID_SDK_ROOT/emulator:$ANDROID_SDK_ROOT/tools:$PATH
+```
+
 ### Misc Docs
 Scaling example: https://github.com/yandeu/phaser3-scaling-resizing-example
 How to fit on iPhone X: https://blog.phonegap.com/displaying-a-phonegap-app-correctly-on-the-iphone-x-c4a85664c493
