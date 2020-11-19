@@ -14,6 +14,7 @@ cd mobile_platforms
 cp -R ../public/* www/ && cordova run android --device
 ```
 Or just `npm run run-android`
+Or `cordova run android`
 
 #### Generate icons for platforms
 Install `cordova-icon`, then run command:
@@ -39,6 +40,17 @@ If no emulator found - export paths:
 export ANDROID_SDK_ROOT=/Users/[username]/Library/Android/sdk
 export PATH=$ANDROID_SDK_ROOT/emulator:$ANDROID_SDK_ROOT/tools:$PATH
 ```
+
+How to generate AAB bundle:
+>
+Launch Android Studio
+Go To Import Project (Eclipse ADT, Gradle, etc).
+Select Android platform directory in your project (/platforms/android).
+Wait for finish the Sync
+Go to Build > Generate Sign Bundle
+Complete Signing info
+Upload de .aab file generated (in path /platforms/android/outputs/
+
 
 ### Misc Docs
 Scaling example: https://github.com/yandeu/phaser3-scaling-resizing-example
