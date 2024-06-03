@@ -1,5 +1,13 @@
 # Cats Escape
-> The game about lazy cats and dump mouse
+> The game about lazy cats and dumb mouse
+
+<p float="left" align="middle">
+<img src="https://github.com/AlexKotl/cats-escape/blob/master/screenshots/6/localhost_3000_(iPhone%205.5_%20No%20Border)%20(1).png?raw=true" alt="drawing" width="260"/>
+<img src="https://github.com/AlexKotl/cats-escape/blob/4a530eccf29ed9f8fb943ca75c7593e22aebbc75/screenshots/6/localhost_3000_(iPhone%205.5_%20No%20Border)%20(2).png?raw=true" alt="drawing" width="260"/>
+<img src="https://github.com/AlexKotl/cats-escape/blob/master/screenshots/6/localhost_3000_(iPhone%205.5_%20No%20Border)%20(3).png?raw=true" alt="drawing" width="260"/>
+</p>
+
+
 
 ### Run the app
 
