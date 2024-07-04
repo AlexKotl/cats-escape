@@ -38,7 +38,7 @@ export default function Home() {
         <div className="display">
           <div className="artboard artboard-demo phone-3">
             <iframe
-              src="/index.html"
+              src="/game.html"
               width="100%"
               height="100%"
               scrolling="no"
